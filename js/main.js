@@ -43,9 +43,9 @@ class Main
   interval()
   {
     let int = setInterval(() => {
-      setTimeout(() => { clearInterval(int) }, 100);
+      setTimeout(() => { clearInterval(int) }, time.out);
       this.draw();
-    }, 30);
+    }, time.int);
   }
 
 
@@ -54,7 +54,7 @@ class Main
     setInterval(() => {
       this.random();
       this.interval();
-    }, 50);
+    }, time.main);
 
     //window.requestAnimationFrame(() => this.loop());
   }
