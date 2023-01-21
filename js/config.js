@@ -4,7 +4,7 @@ const head = {
 	h: 6, // height of block, default - 4
 	km: 12, // distance between blocks, default - 8
 
-	generator: 1, // 1, 2, 3
+	generator: 3, // 1, 2, 3
 };
 
 const child = {
