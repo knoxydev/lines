@@ -18,6 +18,29 @@ class Main
   { this.side = Math.floor(Math.random() * 4) + 1; }
 
 
+  start()
+  {
+    const head_pos = (min, max) => {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    this.x = head_pos(0, this.w);
+    this.y = head_pos(0, this.h);
+
+    this.w = Math.floor(this.w / 10) * 10;
+    this.y = Math.floor(this.y / 10) * 10;
+
+    switch (head.generator) {
+      case 1: main.loop_one(); break;
+      case 2: main.loop_two(); break;
+      case 3: main.loop_the(); break;
+      default: main.loop_one(); break;
+    }
+  }
+
+
   draw()
   {
     this.ctx.fillStyle = child.color;
@@ -31,38 +54,52 @@ class Main
     }
 
     if (this.x < 0) this.x = 0;
-    if (this.x > this.w) this.x = this.w;
+    if (this.x >= this.w) this.x = this.w;
     if (this.y < 0) this.y = 0;
-    if (this.y > this.y) this.y = this.y;
+    if (this.y >= this.y) this.y = this.y;
 
     this.ctx.fillStyle = head.color;
     this.ctx.fillRect(this.x, this.y, head.w, head.h);
   }
 
 
-  interval()
-  {
-    let int = setInterval(() => {
-      setTimeout(() => { clearInterval(int) }, time.out);
-      this.draw();
-    }, time.int);
-  }
-
-
-  loop()
+  loop_one()
   {
     setInterval(() => {
       this.random();
-      this.interval();
-    }, time.main);
+      
+      const int = setInterval(() => {
+        setTimeout(() => { clearInterval(int) }, time_one.out);
+        this.draw();
+      }, time_one.int);
+    }, time_one.main);
+  }
 
-    //window.requestAnimationFrame(() => this.loop());
+
+  loop_two()
+  {
+    this.random();
+    
+    for (let i = 0; i < time_two.dis; i++) { this.draw(); }
+
+    window.requestAnimationFrame(() => this.loop_two());
+  }
+
+
+  loop_the()
+  {
+    setInterval(() => {
+      for (let i = 0; i < time_two.dis; i++) {
+        this.random();
+        this.draw();
+      }
+    }, time_the.main);
   }
 }
 
 
 const main = new Main(canvas.getContext("2d"));
-main.loop();
+main.start();
 
 
 window.onload = () =>
