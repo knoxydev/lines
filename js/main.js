@@ -41,9 +41,16 @@ class Main
   }
 
 
+  random_color()
+  {
+    const rndm = (x = 255) => Math.floor(Math.random() * x);
+    return `rgb(${rndm()}, ${rndm()}, ${rndm()})`;
+  }
+
+
   draw()
   {
-    this.ctx.fillStyle = child.color;
+    this.ctx.fillStyle = (child.random_color == true) ? this.random_color() : child.color;
     this.ctx.fillRect(this.x, this.y, head.w, head.h);
 
     switch (this.side) {

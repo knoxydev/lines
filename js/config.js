@@ -1,13 +1,16 @@
 const head = {
 	color: "red",
-	w: 4, // width of block, default - 4
-	h: 4, // height of block, default - 4
-	km: 8, // distance between blocks, default - 8
+	w: 6, // width of block, default - 4
+	h: 6, // height of block, default - 4
+	km: 12, // distance between blocks, default - 8
 
-	generator: 3, // 1, 2, 3
+	generator: 1, // 1, 2, 3
 };
 
-const child = { color: "#5B5C5F" };
+const child = {
+	color: "#5B5C5F",
+	random_color: true, // default - false
+};
 
 const time_one = {
 	main: 50, // fps of generation, default - 50
